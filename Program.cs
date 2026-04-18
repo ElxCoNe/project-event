@@ -30,4 +30,17 @@ app.MapControllerRoute(
     .WithStaticAssets();
 
 
+// Aplicar migraciones automáticamente
+
+// Crea un "espacio temporal" para pedir servicios
+using (var scope = app.Services.CreateScope())
+{
+    // Pide el DbContext dentro de ese espacio
+    var db = scope.ServiceProvider.GetRequiredService<MySqlDbContext>();
+    
+    // Aplica las migraciones pendientes a la base de datos
+    db.Database.Migrate();
+}
+// Aquí el scope se destruye automáticamente y libera memoria
+
 app.Run();
