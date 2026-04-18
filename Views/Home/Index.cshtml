@@ -1,0 +1,95 @@
+﻿@model List<EventProject.Models.Event>
+
+@{
+    ViewData["Title"] = "Torneos";
+}
+
+<div class="row">
+    <div class="col s12 center-align">
+        <h3 class="white-text">
+            <i class="material-icons large">sports_esports</i>
+            <br/> Torneos GG
+        </h3>
+        <p class="grey-text">Encuentra los mejores torneos de videojuegos</p>
+    </div>
+</div>
+
+@* Filtros por categoría *@
+<div class="row">
+    <div class="col s12 center-align">
+        <a href="?" class="btn grey darken-2 waves-effect waves-light" style="margin: 4px;">Todos</a>
+        @foreach (var cat in new[] { "FPS", "MOBA", "Fighting", "Sports", "RTS", "Battle Royale" })
+        {
+            <a href="?category=@cat" class="btn grey darken-2 waves-effect waves-light" style="margin: 4px;">@cat</a>
+        }
+    </div>
+</div>
+
+
+
+@* Grid de eventos *@
+<div class="row">
+    @if (!Model.Any())
+    {
+        <div class="col s12 center-align">
+            <p class="grey-text">No hay torneos disponibles por el momento.</p>
+        </div>
+    }
+    else
+    {
+        @foreach (var evt in Model)
+        {
+            <div class="col s12 m6 l4">
+                <div class="card grey darken-3">
+                    
+                    @if (evt.ImageURL != null)
+                    {
+                        <div class="card-image">
+                            <img src="@evt.ImageURL" alt="@evt.Name" style="height: 200px; object-fit: cover;" />
+                        </div>
+                    }
+
+                    <div class="card-content white-text">
+                        
+                        @* Badge de estado *@
+                        @if (evt.Status == "Published")
+                        {
+                            <span class="green white-text" style="padding: 3px 10px; border-radius: 4px; font-size: 12px;">Disponible</span>
+                        }
+                        else if (evt.Status == "Cancelled")
+                        {
+                            <span class="red white-text" style="padding: 3px 10px; border-radius: 4px; font-size: 12px;">Cancelado</span>
+                        }
+                        else if (evt.Status == "SoldOut")
+                        {
+                            <span class="orange white-text" style="padding: 3px 10px; border-radius: 4px; font-size: 12px;">Agotado</span>
+                        }
+                        else if (evt.Status == "Finished")
+                        {
+                            <span class="blue-grey white-text" style="padding: 3px 10px; border-radius: 4px; font-size: 12px;">Finalizado</span>
+                        }
+
+                        <span class="grey-text" style="padding: 3px 10px; border-radius: 4px; font-size: 12px; border: 1px solid grey; margin-left: 4px;">@evt.Category</span>
+
+                        <h5 style="margin-top: 10px;">@evt.Name</h5>
+                        <p class="grey-text">@evt.Description</p>
+
+                        <p>
+                            <i class="material-icons tiny">event</i>
+                            @evt.Date.ToString("dd/MM/yyyy")
+                        </p>
+                        <p>
+                            <i class="material-icons tiny">location_on</i>
+                            @evt.Location
+                        </p>
+                        <p>
+                            <i class="material-icons tiny">people</i>
+                            @evt.Capacity cupos
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        }
+    }
+</div>

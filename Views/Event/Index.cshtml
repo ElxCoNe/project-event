@@ -1,0 +1,99 @@
+@model List<EventProject.Models.Event>
+
+@{
+    ViewData["Title"] = "Panel Admin";
+}
+
+<div class="row">
+    <div class="col s12">
+        <h4 class="white-text">
+            <i class="material-icons">sports_esports</i> Panel de Administración
+        </h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <a asp-action="Create" class="btn green darken-2 waves-effect waves-light">
+            <i class="material-icons left">add</i> Nuevo Torneo
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <table class="striped responsive-table" style="background-color: #212121; color: white;">
+            <thead>
+                <tr class="grey darken-3">
+                    <th class="white-text">Nombre</th>
+                    <th class="white-text">Categoría</th>
+                    <th class="white-text">Fecha</th>
+                    <th class="white-text">Capacidad</th>
+                    <th class="white-text">Estado</th>
+                    <th class="white-text">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var evt in Model)
+                {
+                    <tr>
+                        <td>@evt.Name</td>
+                        <td>@evt.Category</td>
+                        <td>@evt.Date.ToString("dd/MM/yyyy")</td>
+                        <td>@evt.Capacity</td>
+                        <td>
+                            @if (evt.Status == "Draft")
+                            {
+                                <span class="grey white-text" style="padding: 3px 8px; border-radius: 4px;">Borrador</span>
+                            }
+                            else if (evt.Status == "Published")
+                            {
+                                <span class="green white-text" style="padding: 3px 8px; border-radius: 4px;">Publicado</span>
+                            }
+                            else if (evt.Status == "Cancelled")
+                            {
+                                <span class="red white-text" style="padding: 3px 8px; border-radius: 4px;">Cancelado</span>
+                            }
+                            else if (evt.Status == "SoldOut")
+                            {
+                                <span class="orange white-text" style="padding: 3px 8px; border-radius: 4px;">Agotado</span>
+                            }
+                            else if (evt.Status == "Finished")
+                            {
+                                <span class="blue-grey white-text" style="padding: 3px 8px; border-radius: 4px;">Finalizado</span>
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@evt.Id" class="btn-small blue waves-effect">
+                                <i class="material-icons">edit</i>
+                            </a>
+
+                            <form asp-action="ChangeStatus" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="@evt.Id" />
+                                <input type="hidden" name="newStatus" value="Published" />
+                                <button type="submit" class="btn-small green waves-effect">
+                                    <i class="material-icons">publish</i>
+                                </button>
+                            </form>
+
+                            <form asp-action="ChangeStatus" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="@evt.Id" />
+                                <input type="hidden" name="newStatus" value="Cancelled" />
+                                <button type="submit" class="btn-small orange waves-effect">
+                                    <i class="material-icons">cancel</i>
+                                </button>
+                            </form>
+
+                            <form asp-action="Delete" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="@evt.Id" />
+                                <button type="submit" class="btn-small red waves-effect">
+                                    <i class="material-icons">delete</i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

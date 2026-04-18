@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GG Torneos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="grey darken-4">
+
+<nav class="black">
+    <div class="nav-wrapper container">
+        <a asp-controller="Home" asp-action="Index" class="brand-logo">
+            <i class="material-icons">sports_esports</i> GG
+        </a>
+        <ul class="right">
+            <li><a asp-controller="Home" asp-action="Index">Torneos</a></li>
+            <li><a asp-controller="Event" asp-action="Index">Admin</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main class="container" style="margin-top: 30px; padding-bottom: 60px;">
+    @RenderBody()
+</main>
+
+<footer class="black center-align" style="padding: 20px;">
+    <p class="grey-text">© 2026 GG - Todos los derechos reservados</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

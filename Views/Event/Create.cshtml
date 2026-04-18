@@ -1,0 +1,103 @@
+@model EventProject.Models.Event
+
+@{
+    ViewData["Title"] = "Nuevo Torneo";
+}
+
+<div class="row">
+    <div class="col s12">
+        <h4 class="white-text">
+            <i class="material-icons">add_circle</i> Crear Nuevo Torneo
+        </h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12 m8">
+        <div class="card grey darken-3">
+            <div class="card-content">
+                <form asp-action="Create" method="post">
+                    
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix white-text">sports_esports</i>
+                            <input id="name" name="Name" type="text" class="white-text" required />
+                            <label for="name" class="white-text">Nombre del Torneo</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix white-text">description</i>
+                            <textarea id="description" name="Description" class="materialize-textarea white-text" required></textarea>
+                            <label for="description" class="white-text">Descripción</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            <i class="material-icons prefix white-text">event</i>
+                            <input id="date" name="Date" type="date" class="white-text" required />
+                            <label for="date" class="white-text active">Fecha</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <i class="material-icons prefix white-text">location_on</i>
+                            <input id="location" name="Location" type="text" class="white-text" required />
+                            <label for="location" class="white-text">Ubicación</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            <i class="material-icons prefix white-text">category</i>
+                            <select name="Category" class="white-text" required>
+                                <option value="" disabled selected>Selecciona categoría</option>
+                                <option value="FPS">FPS</option>
+                                <option value="MOBA">MOBA</option>
+                                <option value="Fighting">Fighting</option>
+                                <option value="Sports">Sports</option>
+                                <option value="RTS">RTS</option>
+                                <option value="Battle Royale">Battle Royale</option>
+                            </select>
+                            <label class="white-text">Categoría</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <i class="material-icons prefix white-text">people</i>
+                            <input id="capacity" name="Capacity" type="number" min="1" class="white-text" required />
+                            <label for="capacity" class="white-text">Capacidad</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix white-text">image</i>
+                            <input id="imageURL" name="ImageURL" type="url" class="white-text" />
+                            <label for="imageURL" class="white-text">URL de imagen (opcional)</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s12">
+                            <button type="submit" class="btn green darken-2 waves-effect waves-light">
+                                <i class="material-icons left">save</i> Guardar Torneo
+                            </button>
+                            <a asp-action="Index" class="btn grey waves-effect waves-light">
+                                <i class="material-icons left">arrow_back</i> Cancelar
+                            </a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var selects = document.querySelectorAll('select');
+            M.FormSelect.init(selects);
+        });
+    </script>
+}
