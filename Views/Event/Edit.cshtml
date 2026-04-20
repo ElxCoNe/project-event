@@ -16,45 +16,45 @@
     <div class="col s12 m8">
         <div class="card grey darken-3">
             <div class="card-content">
-                <form asp-action="Edit" method="post">
+                <form asp-action="Edit" asp-controller="Event" method="post">
                     
-                    <input type="hidden" name="Id" value="@Model.Id" />
-                    <input type="hidden" name="CreatedAt" value="@Model.CreatedAt" />
-                    <input type="hidden" name="Status" value="@Model.Status" />
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="CreatedAt" />
+                    <input type="hidden" asp-for="Status" />
 
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix white-text">sports_esports</i>
-                            <input id="name" name="Name" type="text" class="white-text" value="@Model.Name" required />
-                            <label for="name" class="white-text active">Nombre del Torneo</label>
+                            <input asp-for="Name" type="text" class="white-text" required />
+                            <label asp-for="Name" class="white-text active">Nombre del Torneo</label>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix white-text">description</i>
-                            <textarea id="description" name="Description" class="materialize-textarea white-text" required>@Model.Description</textarea>
-                            <label for="description" class="white-text active">Descripción</label>
+                            <textarea asp-for="Description" class="materialize-textarea white-text" required></textarea>
+                            <label asp-for="Description" class="white-text active">Descripción</label>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix white-text">event</i>
-                            <input id="date" name="Date" type="date" class="white-text" value="@Model.Date.ToString("yyyy-MM-dd")" required />
-                            <label for="date" class="white-text active">Fecha</label>
+                            <input asp-for="Date" type="date" class="white-text" required />
+                            <label asp-for="Date" class="white-text active">Fecha</label>
                         </div>
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix white-text">location_on</i>
-                            <input id="location" name="Location" type="text" class="white-text" value="@Model.Location" required />
-                            <label for="location" class="white-text active">Ubicación</label>
+                            <input asp-for="Location" type="text" class="white-text" required />
+                            <label asp-for="Location" class="white-text active">Ubicación</label>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix white-text">category</i>
-                            <select name="Category" required>
+                            <select asp-for="Category" required>
                                 <option value="" disabled>Selecciona categoría</option>
                                 @foreach (var cat in new[] { "FPS", "MOBA", "Fighting", "Sports", "RTS", "Battle Royale" })
                                 {
@@ -72,16 +72,16 @@
                         </div>
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix white-text">people</i>
-                            <input id="capacity" name="Capacity" type="number" min="1" class="white-text" value="@Model.Capacity" required />
-                            <label for="capacity" class="white-text active">Capacidad</label>
+                            <input asp-for="Capacity" type="number" min="1" class="white-text" required />
+                            <label asp-for="Capacity" class="white-text active">Capacidad</label>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix white-text">image</i>
-                            <input id="imageURL" name="ImageURL" type="url" class="white-text" value="@Model.ImageURL" />
-                            <label for="imageURL" class="white-text active">URL de imagen (opcional)</label>
+                            <input asp-for="ImageURL" type="url" class="white-text" />
+                            <label asp-for="ImageURL" class="white-text active">URL de imagen (opcional)</label>
                         </div>
                     </div>
 
