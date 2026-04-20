@@ -15,9 +15,7 @@ public class EventController : Controller
     
     public IActionResult Index()
     {
-        var events = _db.events
-            .Where(e => e.Status != "Deleted")
-            .ToList();
+        var events = _db.events.Where(e => e.Status != "Deleted").ToList();
         return View(events);
     }
 
